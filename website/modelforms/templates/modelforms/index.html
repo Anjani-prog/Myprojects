@@ -1,0 +1,68 @@
+
+{% if car_list %}
+ 
+    {% for car in car_list %}
+ 
+    <ul>
+ 
+    <li>
+        <table  padding: 15px;>
+        <tr>
+           <th> Car :</th>
+           <th>{{ car.car_name }} </th>
+        </tr>
+        <tr>
+           <th> Price :</th>
+           <th>${{ car.car_price }}</th>
+         </tr>
+         <tr>
+            <th>Horsepower :</th>
+            <th>{{ car.car_horsepower }}</th>
+ 	</tr>
+         <tr>
+           <th>Mileage :</th>
+           <th>{{ car.car_mileage }}</th>
+          </tr>
+         <tr>
+            <th>Brand :</th>
+            <th>{{ car.car_brand }}</th>
+         </tr>
+        <tr>
+            <th>Fueltype :</th>
+            <th>{{ car.car_fueltype }}</th>
+         </tr>
+        <tr>
+            <th>Geartype :</th>
+            <th>{{ car.car_geartype }}</th>
+         </tr>
+        
+        </table>
+        
+           <form action="{% url 'modelforms:car-delete' car.id %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            
+            <button type="submit" class="btn btn-default btn-sm">Delete</button>
+        </form>
+           <form action="{% url 'modelforms:car-update' car.id  %}" method="post" style="display: inline;">
+            {% csrf_token %}
+           
+            <button type="submit" class="btn btn-default btn-sm">Update</button>
+        </form>
+ 
+ 
+    </li>
+ 
+ 
+    </ul>
+ 
+{% endfor %}
+ 
+    {% else %}
+    <h1 style="background-color:DodgerBlue;">No entries found on the database.</h1>
+    
+{% endif %}
+     <form action="{% url 'modelforms:entry'  %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            
+            <button type="submit" class="btn btn-default btn-sm">Make a entry here</button>
+        </form>
